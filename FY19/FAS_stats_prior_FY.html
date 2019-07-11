@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>RODBC_FAS_projects_2.utf8.md</title>
+
+<script src="FAS_stats_prior_FY_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="FAS_stats_prior_FY_files/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="FAS_stats_prior_FY_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="FAS_stats_prior_FY_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="FAS_stats_prior_FY_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="FAS_stats_prior_FY_files/navigation-1.1/tabsets.js"></script>
+<link href="FAS_stats_prior_FY_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="FAS_stats_prior_FY_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="FAS_stats_prior_FY_files/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="FAS_stats_prior_FY_files/plotly-binding-4.9.0/plotly.js"></script>
+<script src="FAS_stats_prior_FY_files/typedarray-0.1/typedarray.min.js"></script>
+<link href="FAS_stats_prior_FY_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="FAS_stats_prior_FY_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="FAS_stats_prior_FY_files/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="FAS_stats_prior_FY_files/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style> th,td{ padding:5px 5px 5px 5px; }</style>
+<div id="fy19-fas-digital-imaging-summary" class="section level1">
+<h1>FY19: FAS digital imaging summary</h1>
+<div id="imaging-services-only" class="section level3">
+<h3>(<em>Imaging Services</em> only)</h3>
+</div>
+<div id="projects" class="section level2">
+<h2>Projects</h2>
+<!-- `#r tbl.filtered.FAS.projects` -->
+<div id="htmlwidget-498e5f653f3a7c4e8458" style="width:100%;height:400px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-498e5f653f3a7c4e8458">{"x":{"visdat":{"3e6431b0c94":["function () ","plotlyVisDat"]},"cur_data":"3e6431b0c94","attrs":{"3e6431b0c94":{"x":{},"y":{},"name":"Projects","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"title":"`Project name`","type":"category","categoryorder":"array","categoryarray":["19th-Century Collections Digitization","75th Anniversary Faculty Exhibition","Adam Matthew","Aerial Photography (negatives) Project, Hidden Collections 2","Aerial Photography Digitization","Albert Lord Photographs Digitization","Alice Paul","Ames Foundation Items","Amy Lowell Outgoing Correspondence","Anandamayi Collection Transcripts","Andover-Harvard Library Digitization PAM/PR","Andover-Harvard: Selected titles from general collections","Andover-Harvard: Selected titles from special collections","Architecture Shelf List","Art Meets Science: Blaschka & Ware Collection of Glass Flower Archives","Art of the Maya and Aztec People: Digitizing Tozzer Library's Mesoamerican Codices","Aziz El-Shawan Collection of Manuscript Scores","Baker Library Historical Collections Outreach Program","Baker Library Special Collections Reformatting","Baker Street Irregulars Deposit","Balanchine at Home and Abroad","Beyond Words","Botany Libraries Ongoing Item Digitization","BWH Publications","Cabot Technology","Casa Curutchet","Catching the Wave II (Women's Movement photographs)","Chinese Local Gazetteers - JiuFangZhi","Chinese Rare Books Digitization -  selected literary bibliographies","Chinese Rare Books Digitization Project-Collectanea","Chinese Rare Books Digitization Project-Collected Works","Chinese Rare Books Digitization Project-Local Gazetteers","Chinese Rare Books Digitization Project-Philosophy","Christopher Wilmarth Archive Project","CLIR/Biodiversity Heritage Library Field Notes Project","Colonial North American Phase II","Countway Library Photographs Digitzation","Countway Library Special Collections","CS51 Exams Digitization","Dan Kiley Collection Digitization","Deich Collection Digitization","Dickinson Family Library","Digital Archive of Massachusetts Anti-Slavery and Anti-Segregation Petitions","Digital Archive of Massachusetts Native American Petitions","Digital Collections of Cuban Patrimony","Digital Library of the Eastern Mediterranean","Digital Scores from the Collections of the Eda Kuhn Loeb Music Library: Ongoing Digitization","Digitization for Teaching and Learning - Botany Libraries","Digitization for Teaching and Learning - Harvard Library ","Digitization for Teaching and Learning - Houghton","Digitization for Teaching and Learning - HYL","Digitization for Teaching and Learning - Widener","DOAK ICFA PHBZ024 Syria Slide Digitization","DOAK ICFA, Eliopoulos Photo Digitization","DOAK ICFA, Misc. MSBZ004 and MSBZ009 Slide Digitization","DOAK ICFA, Ongoing Digitization","DOAK RARE, Ongoing Digitization of Byzantine","DOAK RARE, Ongoing Digitization of Garden","DOAK RARE, Ongoing Digitization of Pre-Columbian","Doris Stevens","Earhart","Edward L. Rand Champlain Society Records","Edward Lear Drawings","English Deeds","Escoto Collection Digitization","European political ephemera","Fine Arts Library General Collection Development","Fine Arts Library Islamic non-Special Collection Development","Fine Arts Library Ongoing Curricular Support Program","Fine Arts Library Special Collection Development","General Pamphlet Digitization Program","George Fitch Collection","Goldman/Malmed","GSD Rare Book Digitization","GSD Special Collections Small Projects","Gutman Library General Collections","Gutman Library Special Collections","Harvard Forest Photographs Digitization","Harvard Library Bulletin","Harvard Observatory Logbooks","Harvard University Archives selected materials","HBS Retired Cases ","Hein Digitization, FY16","Henry James exhibit","Historical photographic views of Harvard, 1853–1990","Historical Postcards of the Americas","HLS HSC Items","HLS, Chayet papers","HLS, Foreign Official Law","HLS, Free the Law","HLS, Records and Briefs","HLS, War Crimes Suite","Holtzman","Horblit Photograph Digitization","HOU HTC Ongoing Theatre Digitization","HOU Preservation Review","Houghton 75th Publication","Houghton 75th Staff Exhibition","Houghton Microfilm Digitization Project","HTC Minstrel Digitization","Hyde Collection Digitization","HYL-Christianity Rare Books Digitization","HYL Chinese Rare Books Digitization -  Er Qi collection","HYL Chinese Rare Books Digitization -  Hart collection","HYL Japanese Digital Collection- Rare Books ","HYL Preservation Review","Illustrated Dante","Immigration American Stage","Italian business records digitization","Japanese Art and Design","Japanese Rare Books on Chinese Literature in the Harvard-Yenching Library Digitization Project","John Lindquist Negatives Project","John Lithgow: Actor as Artist","Joyce Mekeel: Toward the Source","Judaica Ephemera","Judaica Posters","Judaica Publications","Judaica Realia","Judy Chicago","Kayden: POPS Project","Keats Room Rotation February-July 2018","Kenzo Tange Archive Digitization","Korean Rare Books Digitization - Miyoung Lee & Neil Simpkins","Korean Rare Books Digitization Project – Genealogy","KSG working papers","Kuba Royal Family Archive","Landslides Digital Images","Lantern Slides of East Asia","Liberty Loan Campaign","Lieberman Digital Images","Loeb Music Library Special Collections","Lydia Pinkham","Manchuguo Postcards","Manor Rolls Digitization","McBean Photographs ","MCZ- Ongoing Special Collections Digitization","Mellon-Suffrage","Melville Books ","Middle Eastern Posters","Miller Collection","Modern Chinese Politics","Monks House Photographs","NAB/NAC Project","NARA Morgan v Hennigan","NELC – Giza Project Digital Images","Nesson papers","Notopoulos Collection Visual Materials","Obolensky Family Letters","Ongoing Digitization of Maps and Atlases","Ongoing manuscript digitization ","Ongoing Photographs Digitization - Harvard-Yenching","Ongoing Photographs Digitization - Widener","Ongoing published materials digitization ","Ongoing Special Collections Digitization -Wolbach","Original Botanical Illustrations of the Botany Libraries","Packard Collection of Early Recorded Sound","Panoramic Photographs Digitization","Peabody Museum Press Publications","Peiser Image Digitization","Peter Ashton Plot Maps","PHAEDRA","Pinetree","PIRC Deeds","PIRC Digitization","Poetry in Flux—Dance Afoot","Polaroid Consultant Photographs Files (Polaroid Photographers) ","Political Cartoons in the Roosevelt Collection","Quentin Roosevelt Exhibition","R.G. Dun & Co. Digitization","Radcliffe College Archives ","Radcliffe College Archives Periodicals","Radcliffe College Archives Subject Files ","Risorgimento pamphlets","Roman Republic","RSFSR LAW: Preserving Legal Works of the Russian Soviet Federative Socialist Republic","Ruskin Exhibition","Russian Photographs Digitization","Russian Posters Digitization","Russian Visual Materials Digitization","Salted Paper Prints from the Portrait Collection of the Fine Arts Library","Sanskrit Digitization Project","Scanning Key Content Deposits","Scanning Key Content Deposits - Julia Child Project","Scanning Key Content from Houghton Library Deposits","Scanning Key Content from Santo Domingo Collection Deposits","Schlesinger Photograph Digitization","Scrapbooks","Seven Sisters - NEH","Shakespeare: His Collected Works","Slavic Posters","Solti Digitization","Stuart Cary Welch Islamic and South Asian Photograph Collection","Tozzer Library Special Collections","Ukrainian Materials Digitization, Phase II","Ukrainian political ephemera (1991-2014)","Unitarian-Universalist Directories Digitization","Walter Crane Exhibition","Warren Anatomical Museum Catalogs","Widener Preservation Review","William Brewster Collection","William Ellery Channing Digitization","William Rittase Photographs","Woman's Journal","Women's Worlds in Qajar Iran"]},"yaxis":{"title":"Total"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Aziz El-Shawan Collection of Manuscript Scores","Botany Libraries Ongoing Item Digitization","Chinese Local Gazetteers - JiuFangZhi","Chinese Rare Books Digitization -  selected literary bibliographies","Chinese Rare Books Digitization Project-Local Gazetteers","Colonial North American Phase II","CS51 Exams Digitization","Dickinson Family Library","Digital Archive of Massachusetts Native American Petitions","Digital Collections of Cuban Patrimony","Digital Scores from the Collections of the Eda Kuhn Loeb Music Library: Ongoing Digitization","Digitization for Teaching and Learning - Botany Libraries","Digitization for Teaching and Learning - Houghton","Digitization for Teaching and Learning - HYL","DOAK ICFA, Misc. MSBZ004 and MSBZ009 Slide Digitization","DOAK ICFA, Ongoing Digitization","DOAK RARE, Ongoing Digitization of Byzantine","DOAK RARE, Ongoing Digitization of Garden","DOAK RARE, Ongoing Digitization of Pre-Columbian","Edward Lear Drawings","Escoto Collection Digitization","European political ephemera","Fine Arts Library General Collection Development","Fine Arts Library Islamic non-Special Collection Development","Fine Arts Library Ongoing Curricular Support Program","Fine Arts Library Special Collection Development","General Pamphlet Digitization Program","George Fitch Collection","Horblit Photograph Digitization","HOU HTC Ongoing Theatre Digitization","HOU Preservation Review","HTC Minstrel Digitization","Hyde Collection Digitization","HYL-Christianity Rare Books Digitization","HYL Japanese Digital Collection- Rare Books ","HYL Preservation Review","Judaica Ephemera","Judaica Posters","Judaica Realia","Korean Rare Books Digitization - Miyoung Lee & Neil Simpkins","Korean Rare Books Digitization Project – Genealogy","Liberty Loan Campaign","Loeb Music Library Special Collections","Manchuguo Postcards","MCZ- Ongoing Special Collections Digitization","Melville Books ","NARA Morgan v Hennigan","NELC – Giza Project Digital Images","Notopoulos Collection Visual Materials","Ongoing Digitization of Maps and Atlases","Ongoing Photographs Digitization - Widener","Ongoing Special Collections Digitization -Wolbach","Original Botanical Illustrations of the Botany Libraries","PHAEDRA","Risorgimento pamphlets","Russian Visual Materials Digitization","Salted Paper Prints from the Portrait Collection of the Fine Arts Library","Sanskrit Digitization Project","Scanning Key Content from Houghton Library Deposits","Solti Digitization","Stuart Cary Welch Islamic and South Asian Photograph Collection","Widener Preservation Review","Women's Worlds in Qajar Iran"],"y":[869.3,1205,50856.75,3811.5,29.25,63495.45,233,32455.67,876,1357.4,7450.4,90.65,375,15511.85,5580,12453.9,10581.17,33010,9371.73,299,3015.55,132,0,0,0,0,7950.6,3786.5,15587,7500,618.5,3954,2048.85,655.5,47100,8435.9,29998,16387,2777,61581,38207.25,9792.65,268.66,2702,32968.25,6558.2,9865.9,1600,1624,5827,1314.5,15805.82,42864.5,68744.9,8457.08,982,544,747,50,3586.8,0,34012.36,3025],"name":"Projects","type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="support-fas-allocation" class="section level3">
+<h3>Support: FAS Allocation</h3>
+<!-- html table generated in R 3.5.3 by xtable 1.8-3 package -->
+<!-- Thu Jul 11 15:22:13 2019 -->
+<table border="1">
+<tr>
+<th>
+Project name
+</th>
+<th>
+Owning repository
+</th>
+<th>
+Total
+</th>
+</tr>
+<tr>
+<td>
+Aziz El-Shawan Collection of Manuscript Scores
+</td>
+<td>
+MUS
+</td>
+<td>
+$869.3
+</td>
+</tr>
+<tr>
+<td>
+Botany Libraries Ongoing Item Digitization
+</td>
+<td>
+BOH
+</td>
+<td>
+$1205
+</td>
+</tr>
+<tr>
+<td>
+Chinese Local Gazetteers - JiuFangZhi
+</td>
+<td>
+HYL
+</td>
+<td>
+$23855.25
+</td>
+</tr>
+<tr>
+<td>
+Chinese Rare Books Digitization - selected literary bibliographies
+</td>
+<td>
+HYL
+</td>
+<td>
+$3811.5
+</td>
+</tr>
+<tr>
+<td>
+Chinese Rare Books Digitization Project-Local Gazetteers
+</td>
+<td>
+HYL
+</td>
+<td>
+$29.25
+</td>
+</tr>
+<tr>
+<td>
+Dickinson Family Library
+</td>
+<td>
+HOU
+</td>
+<td>
+$32455.67
+</td>
+</tr>
+<tr>
+<td>
+Digital Collections of Cuban Patrimony
+</td>
+<td>
+WID
+</td>
+<td>
+$1357.4
+</td>
+</tr>
+<tr>
+<td>
+Digital Scores from the Collections of the Eda Kuhn Loeb Music Library: Ongoing Digitization
+</td>
+<td>
+MUS
+</td>
+<td>
+$7450.4
+</td>
+</tr>
+<tr>
+<td>
+Digitization for Teaching and Learning - Botany Libraries
+</td>
+<td>
+BOH
+</td>
+<td>
+$90.65
+</td>
+</tr>
+<tr>
+<td>
+Digitization for Teaching and Learning - Houghton
+</td>
+<td>
+HOU
+</td>
+<td>
+$375
+</td>
+</tr>
+<tr>
+<td>
+Digitization for Teaching and Learning - HYL
+</td>
+<td>
+HYL
+</td>
+<td>
+$15511.85
+</td>
+</tr>
+<tr>
+<td>
+Edward Lear Drawings
+</td>
+<td>
+HOU
+</td>
+<td>
+$299
+</td>
+</tr>
+<tr>
+<td>
+Escoto Collection Digitization
+</td>
+<td>
+HOU
+</td>
+<td>
+$3015.55
+</td>
+</tr>
+<tr>
+<td>
+European political ephemera
+</td>
+<td>
+WID
+</td>
+<td>
+$132
+</td>
+</tr>
+<tr>
+<td>
+Fine Arts Library General Collection Development
+</td>
+<td>
+FAL
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+Fine Arts Library General Collection Development
+</td>
+<td>
+WID
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+Fine Arts Library Islamic non-Special Collection Development
+</td>
+<td>
+FAL
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+Fine Arts Library Ongoing Curricular Support Program
+</td>
+<td>
+FAL
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+Fine Arts Library Special Collection Development
+</td>
+<td>
+FAL
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+General Pamphlet Digitization Program
+</td>
+<td>
+WID
+</td>
+<td>
+$7950.6
+</td>
+</tr>
+<tr>
+<td>
+George Fitch Collection
+</td>
+<td>
+HYL
+</td>
+<td>
+$3786.5
+</td>
+</tr>
+<tr>
+<td>
+Horblit Photograph Digitization
+</td>
+<td>
+HOU
+</td>
+<td>
+$15587
+</td>
+</tr>
+<tr>
+<td>
+HOU HTC Ongoing Theatre Digitization
+</td>
+<td>
+HOU
+</td>
+<td>
+$7500
+</td>
+</tr>
+<tr>
+<td>
+HOU Preservation Review
+</td>
+<td>
+HOU
+</td>
+<td>
+$618.5
+</td>
+</tr>
+<tr>
+<td>
+HTC Minstrel Digitization
+</td>
+<td>
+THE
+</td>
+<td>
+$3954
+</td>
+</tr>
+<tr>
+<td>
+Hyde Collection Digitization
+</td>
+<td>
+HOU
+</td>
+<td>
+$2048.85
+</td>
+</tr>
+<tr>
+<td>
+HYL-Christianity Rare Books Digitization
+</td>
+<td>
+HYL
+</td>
+<td>
+$655.5
+</td>
+</tr>
+<tr>
+<td>
+HYL Japanese Digital Collection- Rare Books
+</td>
+<td>
+HYL
+</td>
+<td>
+$47100
+</td>
+</tr>
+<tr>
+<td>
+HYL Preservation Review
+</td>
+<td>
+HYL
+</td>
+<td>
+$8435.9
+</td>
+</tr>
+<tr>
+<td>
+Korean Rare Books Digitization - Miyoung Lee &amp; Neil Simpkins
+</td>
+<td>
+HYL
+</td>
+<td>
+$61581
+</td>
+</tr>
+<tr>
+<td>
+Korean Rare Books Digitization Project – Genealogy
+</td>
+<td>
+HYL
+</td>
+<td>
+$24813
+</td>
+</tr>
+<tr>
+<td>
+Liberty Loan Campaign
+</td>
+<td>
+WID
+</td>
+<td>
+$9792.65
+</td>
+</tr>
+<tr>
+<td>
+Loeb Music Library Special Collections
+</td>
+<td>
+MUS
+</td>
+<td>
+$268.66
+</td>
+</tr>
+<tr>
+<td>
+Manchuguo Postcards
+</td>
+<td>
+HYL
+</td>
+<td>
+$2702
+</td>
+</tr>
+<tr>
+<td>
+MCZ- Ongoing Special Collections Digitization
+</td>
+<td>
+BOH
+</td>
+<td>
+$513
+</td>
+</tr>
+<tr>
+<td>
+MCZ- Ongoing Special Collections Digitization
+</td>
+<td>
+MCZ
+</td>
+<td>
+$32455.25
+</td>
+</tr>
+<tr>
+<td>
+Melville Books
+</td>
+<td>
+HOU
+</td>
+<td>
+$6558.2
+</td>
+</tr>
+<tr>
+<td>
+NARA Morgan v Hennigan
+</td>
+<td>
+WID
+</td>
+<td>
+$9865.9
+</td>
+</tr>
+<tr>
+<td>
+Ongoing Digitization of Maps and Atlases
+</td>
+<td>
+MAP
+</td>
+<td>
+$5827
+</td>
+</tr>
+<tr>
+<td>
+Ongoing Photographs Digitization - Widener
+</td>
+<td>
+WID
+</td>
+<td>
+$1314.5
+</td>
+</tr>
+<tr>
+<td>
+Ongoing Special Collections Digitization -Wolbach
+</td>
+<td>
+WOL
+</td>
+<td>
+$15805.82
+</td>
+</tr>
+<tr>
+<td>
+Original Botanical Illustrations of the Botany Libraries
+</td>
+<td>
+BOH
+</td>
+<td>
+$42864.5
+</td>
+</tr>
+<tr>
+<td>
+PHAEDRA
+</td>
+<td>
+WOL
+</td>
+<td>
+$54731.95
+</td>
+</tr>
+<tr>
+<td>
+Risorgimento pamphlets
+</td>
+<td>
+WID
+</td>
+<td>
+$8457.08
+</td>
+</tr>
+<tr>
+<td>
+Russian Visual Materials Digitization
+</td>
+<td>
+FUN
+</td>
+<td>
+$982
+</td>
+</tr>
+<tr>
+<td>
+Salted Paper Prints from the Portrait Collection of the Fine Arts Library
+</td>
+<td>
+FAL
+</td>
+<td>
+$544
+</td>
+</tr>
+<tr>
+<td>
+Sanskrit Digitization Project
+</td>
+<td>
+HOU
+</td>
+<td>
+$747
+</td>
+</tr>
+<tr>
+<td>
+Scanning Key Content from Houghton Library Deposits
+</td>
+<td>
+HOU
+</td>
+<td>
+$50
+</td>
+</tr>
+<tr>
+<td>
+Solti Digitization
+</td>
+<td>
+MUS
+</td>
+<td>
+$3586.8
+</td>
+</tr>
+<tr>
+<td>
+Stuart Cary Welch Islamic and South Asian Photograph Collection
+</td>
+<td>
+FAL
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+Widener Preservation Review
+</td>
+<td>
+WID
+</td>
+<td>
+$34012.36
+</td>
+</tr>
+</table>
+</div>
+<div id="total-fas-allocation-505567" class="section level3">
+<h3><em>Total, FAS Allocation: $505,567</em></h3>
+</div>
+<div id="support-harvard-library-collections-digitization-program-hlcdp" class="section level3">
+<h3>Support: Harvard Library Collections Digitization Program (HLCDP)</h3>
+<!-- html table generated in R 3.5.3 by xtable 1.8-3 package -->
+<!-- Thu Jul 11 15:22:13 2019 -->
+<table border="1">
+<tr>
+<th>
+Project name
+</th>
+<th>
+Owning repository
+</th>
+<th>
+Total
+</th>
+</tr>
+<tr>
+<td>
+Colonial North American Phase II
+</td>
+<td>
+HOU
+</td>
+<td>
+$49683.4
+</td>
+</tr>
+</table>
+</div>
+<div id="total-hlcdp-49683.40" class="section level3">
+<h3><em>Total, HLCDP: $49,683.40</em></h3>
+</div>
+<div id="support-fees" class="section level3">
+<h3>Support: Fees</h3>
+<!-- html table generated in R 3.5.3 by xtable 1.8-3 package -->
+<!-- Thu Jul 11 15:22:13 2019 -->
+<table border="1">
+<tr>
+<th>
+Project name
+</th>
+<th>
+Owning repository
+</th>
+<th>
+Total
+</th>
+</tr>
+<tr>
+<td>
+Chinese Local Gazetteers - JiuFangZhi
+</td>
+<td>
+HYL
+</td>
+<td>
+$27001.5
+</td>
+</tr>
+<tr>
+<td>
+Colonial North American Phase II
+</td>
+<td>
+HOU
+</td>
+<td>
+$13812.05
+</td>
+</tr>
+<tr>
+<td>
+CS51 Exams Digitization
+</td>
+<td>
+WID
+</td>
+<td>
+$233
+</td>
+</tr>
+<tr>
+<td>
+Digital Archive of Massachusetts Native American Petitions
+</td>
+<td>
+WID
+</td>
+<td>
+$876
+</td>
+</tr>
+<tr>
+<td>
+DOAK ICFA, Misc. MSBZ004 and MSBZ009 Slide Digitization
+</td>
+<td>
+DDO
+</td>
+<td>
+$5580
+</td>
+</tr>
+<tr>
+<td>
+DOAK ICFA, Ongoing Digitization
+</td>
+<td>
+DDO
+</td>
+<td>
+$12453.9
+</td>
+</tr>
+<tr>
+<td>
+DOAK RARE, Ongoing Digitization of Byzantine
+</td>
+<td>
+DDO
+</td>
+<td>
+$10581.17
+</td>
+</tr>
+<tr>
+<td>
+DOAK RARE, Ongoing Digitization of Garden
+</td>
+<td>
+DDO
+</td>
+<td>
+$33010
+</td>
+</tr>
+<tr>
+<td>
+DOAK RARE, Ongoing Digitization of Pre-Columbian
+</td>
+<td>
+DDO
+</td>
+<td>
+$9371.73
+</td>
+</tr>
+<tr>
+<td>
+Judaica Ephemera
+</td>
+<td>
+WID
+</td>
+<td>
+$29998
+</td>
+</tr>
+<tr>
+<td>
+Judaica Posters
+</td>
+<td>
+WID
+</td>
+<td>
+$16387
+</td>
+</tr>
+<tr>
+<td>
+Judaica Realia
+</td>
+<td>
+WID
+</td>
+<td>
+$2777
+</td>
+</tr>
+<tr>
+<td>
+Korean Rare Books Digitization Project – Genealogy
+</td>
+<td>
+HYL
+</td>
+<td>
+$13394.25
+</td>
+</tr>
+<tr>
+<td>
+MCZ- Ongoing Special Collections Digitization
+</td>
+<td>
+MCZ
+</td>
+<td>
+$0
+</td>
+</tr>
+<tr>
+<td>
+NELC – Giza Project Digital Images
+</td>
+<td>
+WID
+</td>
+<td>
+$1600
+</td>
+</tr>
+<tr>
+<td>
+Notopoulos Collection Visual Materials
+</td>
+<td>
+WID
+</td>
+<td>
+$1624
+</td>
+</tr>
+<tr>
+<td>
+PHAEDRA
+</td>
+<td>
+WOL
+</td>
+<td>
+$14012.95
+</td>
+</tr>
+<tr>
+<td>
+Women’s Worlds in Qajar Iran
+</td>
+<td>
+WID
+</td>
+<td>
+$3025
+</td>
+</tr>
+</table>
+</div>
+<div id="total-fees-195738" class="section level3">
+<h3><em>Total, Fees: $195,738</em></h3>
+</div>
+</div>
+<div id="total-projects-750988" class="section level2">
+<h2><mark>Total, projects: $750,988</mark></h2>
+</div>
+<div id="over-the-counter-otc-digitization" class="section level2">
+<h2>Over-the-counter (OTC) digitization</h2>
+<!-- html table generated in R 3.5.3 by xtable 1.8-3 package -->
+<!-- Thu Jul 11 15:22:13 2019 -->
+<table border="1">
+<tr>
+<th>
+Owning repository
+</th>
+<th>
+Total
+</th>
+</tr>
+<tr>
+<td>
+ARN
+</td>
+<td>
+$195
+</td>
+</tr>
+<tr>
+<td>
+CAB
+</td>
+<td>
+$145
+</td>
+</tr>
+<tr>
+<td>
+FAL
+</td>
+<td>
+$2318
+</td>
+</tr>
+<tr>
+<td>
+FAR
+</td>
+<td>
+$40
+</td>
+</tr>
+<tr>
+<td>
+FUN
+</td>
+<td>
+$130
+</td>
+</tr>
+<tr>
+<td>
+HOU
+</td>
+<td>
+$57515
+</td>
+</tr>
+<tr>
+<td>
+HYL
+</td>
+<td>
+$2844.85
+</td>
+</tr>
+<tr>
+<td>
+MAP
+</td>
+<td>
+$4011.5
+</td>
+</tr>
+<tr>
+<td>
+MCZ
+</td>
+<td>
+$136
+</td>
+</tr>
+<tr>
+<td>
+MUS
+</td>
+<td>
+$842
+</td>
+</tr>
+<tr>
+<td>
+THE
+</td>
+<td>
+$7388.5
+</td>
+</tr>
+<tr>
+<td>
+TOZ
+</td>
+<td>
+$290
+</td>
+</tr>
+<tr>
+<td>
+WID
+</td>
+<td>
+$6634.3
+</td>
+</tr>
+</table>
+<div id="total-otc-82490.15" class="section level3">
+<h3><mark>Total, OTC: $82,490.15</mark></h3>
+<hr />
+</div>
+</div>
+<div id="grand-total-833478" class="section level2">
+<h2><mark>Grand total: $833,478</mark></h2>
+<!-- <hr /> -->
+<!-- ## ERR check: all.projects -->
+<!-- * Project repositories: NA, On-Site Exhibit, PRES: Imaging Services Project, Digitization Project, Class, Publication, PRES: Sackler, Imaging Services Project -->
+<!-- * Owning repositories: NA, LAW, WID, BAK, MULTI, HYL, DDO, FAL, PIRC, MUS, MAP, TOZ, HOU, SCH, DIV, WOL, MED, GRA, DES, GUT, FUN, HUA, MCZ, KSG, BOH, ART, CAB, FOR -->
+<!-- ## ERR check: FAS FEE-BASED -->
+<!-- * Project repositories: ARN, CAB, FAL, FAR, FUN, HOU, HYL, MAP, MCZ, MUS, THE, TOZ, WID -->
+<!-- * Owning repositories in all.projects: ARN, ART, BAK, BOH, CAB, DDO, DES, DIV, FAL, FAR, FUN, HOU, HUA, HYL, KSG, LAW, MAP, MCZ, MED, MUS, PATRON, PEA, PIRC, SCH, THE, TOZ, USGS / open source, WID, WOL -->
+<!-- ## ERR check: filtered.FAS.projects -->
+<!-- * Project repositories: NA, LAW, BAK, WID, KSG, MCZ, HYL, SCH, MULTI, DES, HOU, WOL, PIRC, MUS, MED, FAL, MAP, FUN, DIV, BOH, DDO, HUA -->
+<!-- * Owning repositories in all.projects: BOH, DDO, FAL, FUN, HOU, HYL, MAP, MCZ, MUS, THE, WID, WOL -->
+<hr />
+<p><a href="https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/Owning+Repository+Codes">Key to repository codes</a></p>
+<!-- <center> -->
+<!-- <small> `#r lastRevised` </small> -->
+<!-- </center> -->
+<center>
+Last revised: Thu Jul 11 15:22:13 2019
+</center>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
