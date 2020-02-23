@@ -1,0 +1,252 @@
+---
+title: "Preservation Review digitization"
+output: 
+  html_document: 
+    self_contained: no
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars,include=FALSE}
+
+# Add following block to all scripts
+platform <- .Platform$OS.type
+platform <- "windows" # DEBUG
+if(platform == "unix"){
+ basePath <- "/Users/comstock/OneDrive - Harvard University/programming/R/comstock_fcns/"
+ coreVars <- paste0(basePath,"comstockFcns.R")
+ if(!exists(coreVars, mode="function")) source(coreVars)
+} else if(platform == "windows") {
+ win.def <- "C:/Users/whc417/OneDrive - Harvard University/programming/R/comstock_fcns/"
+ win.n.drive <- "N:/OneDrive - Harvard University/programming/R/comstock_fcns/"
+ if(dir.exists(win.def)){
+ basePath <- win.def
+ } else if(dir.exists(win.n.drive)){
+   basePath <- win.n.drive
+ } else{
+   print("ERROR: Cannot find OneDrive")
+ }
+ coreVars <- paste0(basePath,"comstockFcns.R")
+ if(!exists(coreVars, mode="function")) source(coreVars)
+} else {
+list.core.packages <- c("readr",
+                        "httr",
+                        "jsonlite",
+                        "curl",
+                        "stringr",
+                        "dplyr",
+                        "tidyverse",
+                        "xtable",
+                        "formattable",
+                        "htmlTable",
+                        "data.table",
+                        "lubridate",
+                        "RCurl",
+                        "plotly",
+                        "scales",
+                        "tableHTML",
+                        "rsconnect",
+                        "tools",
+                        "janitor")
+lapply(list.core.packages, require, character.only = TRUE)
+#^ load packages ^#
+}
+
+library(DiagrammeR)
+# browseURL("http://rich-iannone.github.io/DiagrammeR/io.html")
+# browseURL("http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html")
+
+# R:\R\misc\diagrammer.Rmd
+
+outputDirLaptop <- "C:\\Users\\whc417\\OneDrive - Harvard University\\html_pages\\fas_dashboard_html\\"
+outputDirDesktop <- "N:\\OneDrive - Harvard University\\html_pages\\fas_dashboard_html\\"
+if(dir.exists(outputDirDesktop) == TRUE){
+  htmlOutputDir <- outputDirDesktop
+  print("USING DESKTOP")
+} else if (dir.exists(outputDirLaptop) == TRUE){
+  htmlOutputDir <- outputDirLaptop
+  print("USING LAPTOP")
+} else {
+  print("Can't locate output dir!!")
+  break
+}
+
+```
+
+
+```{r graphs, include=FALSE}
+
+pr.diag <- grViz(
+  "
+digraph boxes_and_circles {
+
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]
+
+  # several 'node' statements
+  node [shape = box,
+        fontname = Helvetica]
+
+  AS [label = 'Access Services']
+  BB [label = 'Bibliographers']
+  CC [label = 'Collections Care']
+  ISC [label = 'Imaging Services: Cataloging']
+  //ISPS [label='Imaging Services: Patron Services']
+  ISPROD [label='Imaging Services: Production']
+  RECAP [label='ReCap staff']
+
+
+  node [shape = box,fixedsize = FALSE,
+        width = 0.9,color = 'green',
+        fillcolor = azure,style=filled] // sets as circles
+  CTR [label = 'Committed to Retain queue']
+
+  node [shape = oval, fillcolor=linen, rankdir=TB]
+  SHELF [label='Shelf/Storage']
+
+
+  # several 'edge' statements
+  edge [color = gold, arrowType = open]
+
+  AS->CC [label='condition']
+  BB->CC [label='condition/rarity']
+  CTR->CC [label='condition/rarity']
+  RECAP->CC [label='condition']
+
+  CC->ISC [label='apply CC criteria']
+
+  ISC->ISPROD [label='apply IS criteria  ']
+
+  //RETURN
+  edge [color = orangered, arrowType = open]
+  ISPROD->ISC [label=' link to record']
+  ISC->CC [label='return']
+
+  node [rankdir=TB]
+  CC->SHELF [label='return']
+
+}
+")
+  
+ill.diag <- grViz(
+  "
+digraph boxes_and_circles {
+
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]
+
+  # several 'node' statements
+  node [shape = box,
+        fontname = Helvetica]
+  CC [label = 'Collections Care']
+  ISC [label = 'Imaging Services: Cataloging']
+  ISPS [label='Imaging Services: Patron Services']
+  ISPROD [label='Imaging Services: Production']
+
+
+
+  node [shape = box,fixedsize = FALSE,
+        width = 0.9,color = 'green',
+        fillcolor = azure,style=filled] // sets as circles
+  ILL [label='Loan request']
+
+  node [shape = oval, fillcolor=linen, rankdir=TB]
+  SHELF [label='Shelf/Storage']
+
+
+  # several 'edge' statements
+  edge [color = gold, arrowType = open]
+  ILL->CC [label=' condition']
+
+  CC->ISPS [label=' apply CC criteria']
+  ISPS->ISPROD [label=' rush work order']
+  ISPROD->ISC [label=' link to record']
+
+
+  //RETURN
+  edge [color = orangered, arrowType = open]
+  ISC->ISPS
+  ISPS->PATRON [label=' notification: available online']
+  ISPS->CC [label=' return']
+
+
+  node [rankdir=TB]
+  CC->SHELF [label=' return']
+
+}
+")
+
+```
+
+---
+
+## Standard workflow
+
+`r pr.diag`
+
+---
+
+## Loan-triggered digitization
+
+`r ill.diag`
+
+---
+
+### Collections Care Criteria
+
+#### characteristics
+
+* Embrittled texts
+* Extremely rare items that the scholarly community would benefit from being made widely accessible via digitization, and moving the items to HD and restricting physical access to a supervised reading room setting would prevent theft.
+
+#### material types
+
+* All pamphlets, regardless of publication date
+* Early printed items (published prior to 1850)
+* Non-Western titles (Area Studies = Judaica, Middle Eastern, and Slavic)
+* African; Asian; Middle Eastern; Central and South American; island nations.
+* Multi-part titles, including serials are now eligible for consideration.
+
+### Imaging Services Criteria
+
+* Items that can be copied without restriction
+* Items that aren't available online via another reliable source (e.g., Hathi, LoC, Cornell)
+* Items that can not survive handling and cannot be made sturdy via conservation treatment
+
+<br />
+
+```{r tail, include=FALSE}
+
+lastRevised <- timestamp(prefix = "last revised: ",suffix = "")
+
+```
+
+<center>
+<small>
+`r lastRevised`
+</small>
+</center>
+<br />
+
+```{r copyFiles, include=FALSE}
+
+thisFile <- "PreservationReviewWorkflow_diagram.Rmd"
+file.exists(thisFile)
+# rmarkdown::render(thisFile)
+
+file.copy(from = thisFile,
+          to = paste0(htmlOutputDir,"PreservationReviewWorkflow_diagram.html"),
+          overwrite = TRUE)
+pageDir <- "PreservationReviewWorkflow_diagram_files"
+dir.exists(pageDir)
+dir.exists(htmlOutputDir)
+file.copy(from = pageDir,
+          to = htmlOutputDir,
+          recursive = TRUE,
+          overwrite = TRUE)
+
+```
+
