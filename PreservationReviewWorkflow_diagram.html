@@ -1,252 +1,303 @@
----
-title: "Preservation Review digitization"
-output: 
-  html_document: 
-    self_contained: no
-    theme: spacelab
----
+<!DOCTYPE html>
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+<html>
 
-```{r cars,include=FALSE}
+<head>
 
-# Add following block to all scripts
-platform <- .Platform$OS.type
-platform <- "windows" # DEBUG
-if(platform == "unix"){
- basePath <- "/Users/comstock/OneDrive - Harvard University/programming/R/comstock_fcns/"
- coreVars <- paste0(basePath,"comstockFcns.R")
- if(!exists(coreVars, mode="function")) source(coreVars)
-} else if(platform == "windows") {
- win.def <- "C:/Users/whc417/OneDrive - Harvard University/programming/R/comstock_fcns/"
- win.n.drive <- "N:/OneDrive - Harvard University/programming/R/comstock_fcns/"
- if(dir.exists(win.def)){
- basePath <- win.def
- } else if(dir.exists(win.n.drive)){
-   basePath <- win.n.drive
- } else{
-   print("ERROR: Cannot find OneDrive")
- }
- coreVars <- paste0(basePath,"comstockFcns.R")
- if(!exists(coreVars, mode="function")) source(coreVars)
-} else {
-list.core.packages <- c("readr",
-                        "httr",
-                        "jsonlite",
-                        "curl",
-                        "stringr",
-                        "dplyr",
-                        "tidyverse",
-                        "xtable",
-                        "formattable",
-                        "htmlTable",
-                        "data.table",
-                        "lubridate",
-                        "RCurl",
-                        "plotly",
-                        "scales",
-                        "tableHTML",
-                        "rsconnect",
-                        "tools",
-                        "janitor")
-lapply(list.core.packages, require, character.only = TRUE)
-#^ load packages ^#
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Preservation Review digitization</title>
+
+<script src="PreservationReviewWorkflow_diagram_files/jquery-1.11.3/jquery.min.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="PreservationReviewWorkflow_diagram_files/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="PreservationReviewWorkflow_diagram_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/navigation-1.1/tabsets.js"></script>
+<link href="PreservationReviewWorkflow_diagram_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="PreservationReviewWorkflow_diagram_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="PreservationReviewWorkflow_diagram_files/viz-0.3/viz.js"></script>
+<link href="PreservationReviewWorkflow_diagram_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="PreservationReviewWorkflow_diagram_files/grViz-binding-1.0.1/grViz.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-library(DiagrammeR)
-# browseURL("http://rich-iannone.github.io/DiagrammeR/io.html")
-# browseURL("http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html")
-
-# R:\R\misc\diagrammer.Rmd
-
-outputDirLaptop <- "C:\\Users\\whc417\\OneDrive - Harvard University\\html_pages\\fas_dashboard_html\\"
-outputDirDesktop <- "N:\\OneDrive - Harvard University\\html_pages\\fas_dashboard_html\\"
-if(dir.exists(outputDirDesktop) == TRUE){
-  htmlOutputDir <- outputDirDesktop
-  print("USING DESKTOP")
-} else if (dir.exists(outputDirLaptop) == TRUE){
-  htmlOutputDir <- outputDirLaptop
-  print("USING LAPTOP")
-} else {
-  print("Can't locate output dir!!")
-  break
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
 
-```
-
-
-```{r graphs, include=FALSE}
-
-pr.diag <- grViz(
-  "
-digraph boxes_and_circles {
-
-  # a 'graph' statement
-  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]
-
-  # several 'node' statements
-  node [shape = box,
-        fontname = Helvetica]
-
-  AS [label = 'Access Services']
-  BB [label = 'Bibliographers']
-  CC [label = 'Collections Care']
-  ISC [label = 'Imaging Services: Cataloging']
-  //ISPS [label='Imaging Services: Patron Services']
-  ISPROD [label='Imaging Services: Production']
-  RECAP [label='ReCap staff']
-
-
-  node [shape = box,fixedsize = FALSE,
-        width = 0.9,color = 'green',
-        fillcolor = azure,style=filled] // sets as circles
-  CTR [label = 'Committed to Retain queue']
-
-  node [shape = oval, fillcolor=linen, rankdir=TB]
-  SHELF [label='Shelf/Storage']
-
-
-  # several 'edge' statements
-  edge [color = gold, arrowType = open]
-
-  AS->CC [label='condition']
-  BB->CC [label='condition/rarity']
-  CTR->CC [label='condition/rarity']
-  RECAP->CC [label='condition']
-
-  CC->ISC [label='apply CC criteria']
-
-  ISC->ISPROD [label='apply IS criteria  ']
-
-  //RETURN
-  edge [color = orangered, arrowType = open]
-  ISPROD->ISC [label=' link to record']
-  ISC->CC [label='return']
-
-  node [rankdir=TB]
-  CC->SHELF [label='return']
-
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
 }
-")
-  
-ill.diag <- grViz(
-  "
-digraph boxes_and_circles {
 
-  # a 'graph' statement
-  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]
-
-  # several 'node' statements
-  node [shape = box,
-        fontname = Helvetica]
-  CC [label = 'Collections Care']
-  ISC [label = 'Imaging Services: Cataloging']
-  ISPS [label='Imaging Services: Patron Services']
-  ISPROD [label='Imaging Services: Production']
-
-
-
-  node [shape = box,fixedsize = FALSE,
-        width = 0.9,color = 'green',
-        fillcolor = azure,style=filled] // sets as circles
-  ILL [label='Loan request']
-
-  node [shape = oval, fillcolor=linen, rankdir=TB]
-  SHELF [label='Shelf/Storage']
-
-
-  # several 'edge' statements
-  edge [color = gold, arrowType = open]
-  ILL->CC [label=' condition']
-
-  CC->ISPS [label=' apply CC criteria']
-  ISPS->ISPROD [label=' rush work order']
-  ISPROD->ISC [label=' link to record']
-
-
-  //RETURN
-  edge [color = orangered, arrowType = open]
-  ISC->ISPS
-  ISPS->PATRON [label=' notification: available online']
-  ISPS->CC [label=' return']
-
-
-  node [rankdir=TB]
-  CC->SHELF [label=' return']
-
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
-")
 
-```
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
 
----
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
 
-## Standard workflow
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
 
-`r pr.diag`
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
----
+<!-- code folding -->
 
-## Loan-triggered digitization
 
-`r ill.diag`
 
----
 
-### Collections Care Criteria
+</head>
 
-#### characteristics
+<body>
 
-* Embrittled texts
-* Extremely rare items that the scholarly community would benefit from being made widely accessible via digitization, and moving the items to HD and restricting physical access to a supervised reading room setting would prevent theft.
 
-#### material types
+<div class="container-fluid main-container">
 
-* All pamphlets, regardless of publication date
-* Early printed items (published prior to 1850)
-* Non-Western titles (Area Studies = Judaica, Middle Eastern, and Slavic)
-* African; Asian; Middle Eastern; Central and South American; island nations.
-* Multi-part titles, including serials are now eligible for consideration.
 
-### Imaging Services Criteria
 
-* Items that can be copied without restriction
-* Items that aren't available online via another reliable source (e.g., Hathi, LoC, Cornell)
-* Items that can not survive handling and cannot be made sturdy via conservation treatment
 
-<br />
+<div class="fluid-row" id="header">
 
-```{r tail, include=FALSE}
 
-lastRevised <- timestamp(prefix = "last revised: ",suffix = "")
 
-```
+<h1 class="title toc-ignore">Preservation Review digitization</h1>
 
+</div>
+
+
+<hr />
+<div id="standard-workflow" class="section level2">
+<h2>Standard workflow</h2>
+<div id="htmlwidget-de7f362c5974d697dfd7" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-de7f362c5974d697dfd7">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  AS [label = \"Access Services\"]\n  BB [label = \"Bibliographers\"]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n  RECAP [label=\"ReCap staff\"]\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  CTR [label = \"Committed to Retain queue\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n\n  AS->CC [label=\"condition\"]\n  BB->CC [label=\"condition/rarity\"]\n  CTR->CC [label=\"condition/rarity\"]\n  RECAP->CC [label=\"condition\"]\n\n  CC->ISC [label=\"apply CC criteria\"]\n\n  ISC->ISPROD [label=\"apply IS criteria  \"]\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISPROD->ISC [label=\" link to record\"]\n  ISC->CC [label=\"return\"]\n\n  node [rankdir=TB]\n  CC->SHELF [label=\"return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="loan-triggered-digitization" class="section level2">
+<h2>Loan-triggered digitization</h2>
+<div id="htmlwidget-4b92f611fe8db8ba9357" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4b92f611fe8db8ba9357">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  ILL [label=\"Loan request\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n  ILL->CC [label=\" condition\"]\n\n  CC->ISPS [label=\" apply CC criteria\"]\n  ISPS->ISPROD [label=\" rush work order\"]\n  ISPROD->ISC [label=\" link to record\"]\n\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISC->ISPS\n  ISPS->PATRON [label=\" notification: available online\"]\n  ISPS->CC [label=\" return\"]\n\n\n  node [rankdir=TB]\n  CC->SHELF [label=\" return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<div id="collections-care-criteria" class="section level3">
+<h3>Collections Care Criteria</h3>
+<div id="characteristics" class="section level4">
+<h4>characteristics</h4>
+<ul>
+<li>Embrittled texts</li>
+<li>Extremely rare items that the scholarly community would benefit from being made widely accessible via digitization, and moving the items to HD and restricting physical access to a supervised reading room setting would prevent theft.</li>
+</ul>
+</div>
+<div id="material-types" class="section level4">
+<h4>material types</h4>
+<ul>
+<li>All pamphlets, regardless of publication date</li>
+<li>Early printed items (published prior to 1850)</li>
+<li>Non-Western titles (Area Studies = Judaica, Middle Eastern, and Slavic)</li>
+<li>African; Asian; Middle Eastern; Central and South American; island nations.</li>
+<li>Multi-part titles, including serials are now eligible for consideration.</li>
+</ul>
+</div>
+</div>
+<div id="imaging-services-criteria" class="section level3">
+<h3>Imaging Services Criteria</h3>
+<ul>
+<li>Items that can be copied without restriction</li>
+<li>Items that aren’t available online via another reliable source (e.g., Hathi, LoC, Cornell)</li>
+<li>Items that can not survive handling and cannot be made sturdy via conservation treatment</li>
+</ul>
+</div>
+<div id="digitization-in-lieu-of-loan" class="section level3">
+<h3>Digitization in lieu of loan</h3>
+<ul>
+<li>???</li>
+</ul>
+<div id="to-do-reporting" class="section level5">
+<h5>To Do: Reporting</h5>
+<ul>
+<li>Reporting how quickly we fulfill orders</li>
+<li>Reporting how many requests we fulfill</li>
+<li>Reporting on source of loan request</li>
+<li></li>
+</ul>
+</div>
+<div id="other-questions" class="section level5">
+<h5>other questions</h5>
+<ul>
+<li>How are we going to deal with copyright protected items we cannot share online?</li>
+</ul>
+<p><br /></p>
 <center>
-<small>
-`r lastRevised`
-</small>
+<small> last revised: Sat Feb 22 19:36:25 2020 </small>
 </center>
-<br />
+<p><br /></p>
+</div>
+</div>
+</div>
 
-```{r copyFiles, include=FALSE}
 
-thisFile <- "PreservationReviewWorkflow_diagram.Rmd"
-file.exists(thisFile)
-# rmarkdown::render(thisFile)
 
-file.copy(from = thisFile,
-          to = paste0(htmlOutputDir,"PreservationReviewWorkflow_diagram.html"),
-          overwrite = TRUE)
-pageDir <- "PreservationReviewWorkflow_diagram_files"
-dir.exists(pageDir)
-dir.exists(htmlOutputDir)
-file.copy(from = pageDir,
-          to = htmlOutputDir,
-          recursive = TRUE,
-          overwrite = TRUE)
 
-```
+</div>
 
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
