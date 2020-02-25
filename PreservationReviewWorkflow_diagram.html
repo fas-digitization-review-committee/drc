@@ -189,14 +189,14 @@ summary {
 <hr />
 <div id="standard-workflow" class="section level2">
 <h2>Standard workflow</h2>
-<div id="htmlwidget-001d90294b8bb1f4e5bf" style="width:960px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-001d90294b8bb1f4e5bf">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  AS [label = \"Access Services\"]\n  BB [label = \"Bibliographers\"]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n  RECAP [label=\"ReCap staff\"]\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  CTR [label = \"Committed to Retain queue\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n\n  AS->CC [label=\"condition\"]\n  BB->CC [label=\"condition/rarity\"]\n  CTR->CC [label=\"condition/rarity\"]\n  RECAP->CC [label=\"condition\"]\n\n  CC->ISC [label=\"apply CC criteria\"]\n\n  ISC->ISPROD [label=\"apply IS criteria  \"]\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISPROD->ISC [label=\" link to record\"]\n  ISC->CC [label=\"return\"]\n\n  node [rankdir=TB]\n  CC->SHELF [label=\"return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ec1bf48b41bf4d8fccfb" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ec1bf48b41bf4d8fccfb">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  AS [label = \"Access Services\"]\n  BB [label = \"Bibliographers\"]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n  RECAP [label=\"ReCap staff\"]\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  CTR [label = \"Committed to Retain queue\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n\n  AS->CC [label=\"condition\"]\n  BB->CC [label=\"condition/rarity\"]\n  CTR->CC [label=\"condition/rarity\"]\n  RECAP->CC [label=\"condition\"]\n\n  CC->ISC [label=\"apply CC criteria\"]\n\n  ISC->ISPROD [label=\"apply IS criteria  \"]\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISPROD->ISC [label=\" link to record\"]\n  ISC->CC [label=\"return\"]\n\n  node [rankdir=TB]\n  CC->SHELF [label=\"return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <hr />
 </div>
 <div id="loan-triggered-digitization" class="section level2">
 <h2>Loan-triggered digitization</h2>
-<div id="htmlwidget-9c257cedc20673d8e2f6" style="width:960px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9c257cedc20673d8e2f6">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  ILL [label=\"Loan request\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n  ILL->CC [label=\" condition\"]\n\n  CC->ISPS [label=\" apply CC criteria\"]\n  ISPS->ISPROD [label=\" rush work order\"]\n  ISPROD->ISC [label=\" link to record\"]\n\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISC->ISPS\n  ISPS->PATRON [label=\" notification: available online\"]\n  ISPS->CC [label=\" return\"]\n\n\n  node [rankdir=TB]\n  CC->SHELF [label=\" return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5528d93b05a4811e5166" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5528d93b05a4811e5166">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  CC [label = \"Collections Care\"]\n  //ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  //ISPROD [label=\"Imaging Services: Production\"]\n  //ISDRS [label=\"Imaging Services: DRS depositing\"]\n  ISC [label = \"IS: Cataloging\"]\n  ISPS [label=\"IS: Patron Services\"]\n  ISPROD [label=\"IS: Production\"]\n  ISDRS [label=\"IS: DRS depositing\"]\n  ILL [label=\"ILL\"]\n\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  REQUEST [label=\"Loan request\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n  //INCOMING\n  REQUEST->CC [label=\" condition\"]\n\n  CC->ISPS [label=\" apply CC criteria\"]\n  ISPS->ISPROD [label=\" rush work order\"]\n  ISPROD->ISDRS [label=\" hand-off item & work order\"]\n  ISDRS->ISC [label=\" link to record\"]\n\n\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n\n  ISC->ISPS [label=\" complete order      \"]\n  ISPS->ILL [label=\" provide link/PDF for patron\"]\n  ISPS->CC [label=\" item\"]\n  ILL->PATRON [label=\" link/PDF\"]\n  \n  node [rankdir=TB]\n  CC->SHELF [label=\" return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <hr />
 <div id="collections-care-criteria" class="section level3">
 <h3>Collections Care Criteria</h3>
@@ -228,28 +228,44 @@ summary {
 <li>Items that can not survive handling and cannot be made sturdy via conservation treatment</li>
 </ul>
 </div>
-<div id="digitization-in-lieu-of-loan" class="section level3">
-<h3>Digitization in lieu of loan</h3>
+<div id="digitization-in-lieu-of-loan-dill" class="section level3">
+<h3>Digitization in lieu of loan (DILL)</h3>
+<div id="eligibility" class="section level4">
+<h4>eligibility</h4>
 <ul>
-<li>???</li>
-</ul>
-<div id="to-do-reporting" class="section level5">
-<h5>To Do: Reporting</h5>
+<li>Widener items only</li>
+<li>Items that cannot be shared due to condition</li>
+<li>Copyright protected items will be digitized and DRS deposited
 <ul>
-<li>Reporting how quickly we fulfill orders</li>
-<li>Reporting how many requests we fulfill</li>
-<li>Reporting on source of loan request</li>
-<li></li>
+<li>NET holding will be suppressed.</li>
+<li>DRS access flag set to <strong><em>N</em></strong></li>
+<li>583 note that we can search on to gather all dark-archived items. (DA items are digitized items coded as <strong><em>N</em></strong> in DRS.)</li>
+</ul></li>
 </ul>
 </div>
-<div id="other-questions" class="section level5">
-<h5>other questions</h5>
+<div id="reporting" class="section level4">
+<h4>Reporting</h4>
 <ul>
-<li>How are we going to deal with copyright protected items we cannot share online?</li>
+<li><p>Aeon reporting regarding who quickly IS fulfills DILL orders</p>
+<ul>
+<li>Date order created – Date order <em>finished</em></li>
+<li><mark>Assuming ILL will be able to report fulfillment time:</mark>
+<ul>
+<li>Date order submitted – Date order <em>fulfilled</em></li>
+</ul></li>
+</ul></li>
+<li><p>Reporting how many requests we fulfill</p>
+<ul>
+<li><strong>VIA a newly created <em>Digitization in lieu of loan</em> project/activity</strong></li>
+</ul></li>
+<li><p>Reporting on source of loan request</p>
+<ul>
+<li><strong>Use ILL request ID as Aeon bundle ID</strong> so that we can, if desired, work with ILL to report on loan recipient demographics. <em>Not a key concern for IS.</em></li>
+</ul></li>
 </ul>
 <p><br /></p>
 <center>
-<small> last revised: Tue Feb 25 09:02:19 2020 </small>
+<small> last revised: Tue Feb 25 15:05:28 2020 </small>
 </center>
 <p><br /></p>
 </div>
