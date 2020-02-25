@@ -189,21 +189,21 @@ summary {
 <hr />
 <div id="standard-workflow" class="section level2">
 <h2>Standard workflow</h2>
-<div id="htmlwidget-04c6072342abff0f4524" style="width:960px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-04c6072342abff0f4524">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  AS [label = \"Access Services\"]\n  BB [label = \"Bibliographers\"]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n  RECAP [label=\"ReCap staff\"]\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  CTR [label = \"Committed to Retain queue\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n\n  AS->CC [label=\"condition\"]\n  BB->CC [label=\"condition/rarity\"]\n  CTR->CC [label=\"condition/rarity\"]\n  RECAP->CC [label=\"condition\"]\n\n  CC->ISC [label=\"apply CC criteria\"]\n\n  ISC->ISPROD [label=\"apply IS criteria  \"]\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISPROD->ISC [label=\" link to record\"]\n  ISC->CC [label=\"return\"]\n\n  node [rankdir=TB]\n  CC->SHELF [label=\"return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-57ccb52f859247a0be3a" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-57ccb52f859247a0be3a">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  AS [label = \"Access Services\"]\n  BB [label = \"Bibliographers\"]\n  CC [label = \"Collections Care\"]\n  ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  ISPROD [label=\"Imaging Services: Production\"]\n  RECAP [label=\"ReCap staff\"]\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  CTR [label = \"Committed to Retain queue\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n\n  AS->CC [label=\"condition\"]\n  BB->CC [label=\"condition/rarity\"]\n  CTR->CC [label=\"condition/rarity\"]\n  RECAP->CC [label=\"condition\"]\n\n  CC->ISC [label=\"apply CC criteria\"]\n\n  ISC->ISPROD [label=\"apply IS criteria  \"]\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n  ISPROD->ISC [label=\" link to record\"]\n  ISC->CC [label=\"return\"]\n\n  node [rankdir=TB]\n  CC->SHELF [label=\"return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <hr />
 </div>
 <div id="loan-triggered-digitization" class="section level2">
 <h2>Loan-triggered digitization</h2>
-<div id="htmlwidget-1c1645623f1ac9234b39" style="width:960px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1c1645623f1ac9234b39">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  CC [label = \"Collections Care\"]\n  //ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  //ISPROD [label=\"Imaging Services: Production\"]\n  //ISDRS [label=\"Imaging Services: DRS depositing\"]\n  ISC [label = \"IS: Cataloging\"]\n  ISPS [label=\"IS: Patron Services\"]\n  ISPROD [label=\"IS: Production\"]\n  ISDRS [label=\"IS: DRS depositing\"]\n  ILL [label=\"ILL\"]\n\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  REQUEST [label=\"Loan request\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n  //INCOMING\n  REQUEST->CC [label=\" condition\"]\n\n  CC->ISPS [label=\" apply CC criteria\"]\n  ISPS->ISPROD [label=\" rush work order\"]\n  ISPROD->ISDRS [label=\" hand-off item & work order\"]\n  ISDRS->ISC [label=\" link to record\"]\n\n\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n\n  ISC->ISPS [label=\" complete order      \"]\n  ISPS->ILL [label=\" provide link/PDF for patron\"]\n  ISPS->CC [label=\" item\"]\n  ILL->PATRON [label=\" link/PDF\"]\n  \n  node [rankdir=TB]\n  CC->SHELF [label=\" return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-dfcfae5ec7a4c0be30c6" style="width:960px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dfcfae5ec7a4c0be30c6">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10, rankdir = TB, layout = dot]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  CC [label = \"Collections Care\"]\n  //ISC [label = \"Imaging Services: Cataloging\"]\n  //ISPS [label=\"Imaging Services: Patron Services\"]\n  //ISPROD [label=\"Imaging Services: Production\"]\n  //ISDRS [label=\"Imaging Services: DRS depositing\"]\n  ISC [label = \"IS: Cataloging\"]\n  ISPS [label=\"IS: Patron Services\"]\n  ISPROD [label=\"IS: Production\"]\n  ISDRS [label=\"IS: DRS depositing\"]\n  ILL [label=\"ILL\"]\n\n\n\n  node [shape = box,fixedsize = FALSE,\n        width = 0.9,color = \"green\",\n        fillcolor = azure,style=filled] // sets as circles\n  REQUEST [label=\"Loan request\"]\n\n  node [shape = oval, fillcolor=linen, rankdir=TB]\n  SHELF [label=\"Shelf/Storage\"]\n\n\n  # several \"edge\" statements\n  edge [color = gold, arrowType = open]\n  //INCOMING\n  REQUEST->CC [label=\" condition\"]\n\n  CC->ISPS [label=\" apply CC criteria\"]\n  ISPS->ISPROD [label=\" rush work order\"]\n  ISPROD->ISDRS [label=\" hand-off item & work order\"]\n  ISDRS->ISC [label=\" link to record\"]\n\n\n\n  //RETURN\n  edge [color = orangered, arrowType = open]\n\n  ISC->ISPS [label=\" complete order      \"]\n  ISPS->ILL [label=\" provide link/PDF for patron\"]\n  ISPS->CC [label=\" item\"]\n  ILL->PATRON [label=\" link/PDF\"]\n  \n  node [rankdir=TB]\n  CC->SHELF [label=\" return\"]\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <hr />
 <div id="collections-care-criteria" class="section level3">
 <h3>Collections Care Criteria</h3>
 <div id="characteristics" class="section level4">
 <h4>characteristics</h4>
 <ul>
-<li>Embrittled or otherwise frgile texts</li>
+<li>Embrittled or otherwise fragile texts</li>
 <li>Texts with foldouts</li>
 <li>Gifts of illustrious donors</li>
 <li>Extremely rare items that the scholarly community would benefit from being made widely accessible via digitization, and moving the items to HD and restricting physical access to a supervised reading room setting would prevent theft.</li>
@@ -212,7 +212,7 @@ summary {
 <div id="material-types" class="section level4">
 <h4>material types</h4>
 <ul>
-<li>All pamphlets, regardless of publication date</li>
+<li>Pamphlets, up to 1924</li>
 <li>Early printed items (published prior to 1900)</li>
 <li>Non-Western titles (Area Studies = Judaica, Middle Eastern, and Slavic)</li>
 <li>African; Asian; Middle Eastern; Central and South American; island nations.</li>
@@ -273,7 +273,7 @@ summary {
 </ul>
 <p><br /></p>
 <center>
-<small> last revised: Tue Feb 25 15:34:23 2020 </small>
+<small> last revised: Tue Feb 25 15:55:18 2020 </small>
 </center>
 <p><br /></p>
 </div>
